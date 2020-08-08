@@ -1,0 +1,11 @@
+language: java
+jdk:
+  - openjdk14
+sudo: true
+dist: trusty
+before_install:
+  - chmod +x mvnw
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: weather-snapshot-java

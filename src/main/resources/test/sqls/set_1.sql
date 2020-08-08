@@ -1,0 +1,1 @@
+insert into sites (id, name, domain) values (50, 'aaa', 'bbb.com');
