@@ -21,17 +21,16 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Service
 public class DownloaderService
 {
-    private HtmlLogService htmlLogService;
-    private SiteUriService siteUriService;
-    private DateFactory dateFactory;
-    private DateTimeService dateTimeService;
+    private HtmlLogService      htmlLogService;
+    private SiteUriService      siteUriService;
+    private DateFactory         dateFactory;
+    private DateTimeService     dateTimeService;
     private JsoupConnectFactory jsoupConnectFactory;
-    private Logger logger;
+    private Logger              logger;
 
     @Autowired
     public void setHtmlLogService(HtmlLogService htmlLogService)
@@ -76,12 +75,12 @@ public class DownloaderService
         for (SiteUrisWithDomain siteUrisWithDomain : siteUriService.searchWithDomain())
         {
             SiteUri siteUri = siteUrisWithDomain.getSiteUri();
-            String url = siteUrisWithDomain.getDomain().concat(siteUri.getUri());
+            String  url     = siteUrisWithDomain.getDomain().concat(siteUri.getUri());
 
             try
             {
-                Document doc = getHtmlBody(jsoupConnectFactory.create(url), siteUri);
-                String body = doc.select("body").toString();
+                Document doc  = getHtmlBody(jsoupConnectFactory.create(url), siteUri);
+                String   body = doc.select("body").toString();
 
                 htmlLogService.insert(
                     new HtmlLog(
@@ -96,7 +95,8 @@ public class DownloaderService
 
                 logger.info("Download from: ".concat(siteUri.getMethod().toString()).concat("|").concat(url));
 
-            } catch (IOException | DownloadException e)
+            }
+            catch (IOException | DownloadException e)
             {
                 logger.error("Download error on: ".concat(url), e);
             }
