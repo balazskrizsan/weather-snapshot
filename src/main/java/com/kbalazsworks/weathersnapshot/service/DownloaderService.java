@@ -94,7 +94,7 @@ public class DownloaderService
                     )
                 );
 
-                logger.info("Download from: ".concat(url));
+                logger.info("Download from: ".concat(siteUri.getMethod().toString()).concat("|").concat(url));
 
             } catch (IOException | DownloadException e)
             {
