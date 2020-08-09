@@ -33,12 +33,12 @@ insert into site_uris (site_id, site_uri_id, latest_parser_version_id, method, u
     (1, 2, 1, 1, '/30napos/Pécs', null),
     (1, 2, 1, 1, '/30napos/Miskolc', null),
     (1, 2, 1, 1, '/30napos/Zamárdi', null),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "46.20", "n": "20.15", "tel": "Szeged"}'),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "46.00", "n": "18.35", "tel": "Pécs"}'),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.60", "n": "17.75", "tel": "Győr"}'),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.50", "n": "21.65", "tel": "Debrecen"}'),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.50", "n": "19.10", "tel": "Budapest"}'),
-    (2, 3, 1, 1, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "48.00", "n": "20.75", "tel": "Miskolc"}');
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "46.20", "n": "20.15", "tel": "Szeged"}'),
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "46.00", "n": "18.35", "tel": "Pécs"}'),
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.60", "n": "17.75", "tel": "Győr"}'),
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.50", "n": "21.65", "tel": "Debrecen"}'),
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "47.50", "n": "19.10", "tel": "Budapest"}'),
+    (2, 3, 1, 2, '/idojaras/elorejelzes/magyarorszagi_telepulesek/main.php', '{"valtozatlan": "true", "kod": "0", "lt": "48.00", "n": "20.75", "tel": "Miskolc"}');
 
 create table html_logs(
     id                bigserial not null,
