@@ -31,7 +31,6 @@ import static org.springframework.test.context.jdbc.SqlConfig.TransactionMode.IS
 
 public class HtmlLogServiceTest extends AbstractIntegrationTest
 {
-    final private HtmlLogs HtmlLogsTable = HtmlLogs.HTML_LOGS;
 
 
     @Autowired
@@ -96,14 +95,14 @@ public class HtmlLogServiceTest extends AbstractIntegrationTest
         // Assert
         Result<Record5<Integer, Integer, Integer, String, LocalDateTime>> record = qB
             .select(
-                HtmlLogsTable.SITE_ID,
-                HtmlLogsTable.SITE_URI_ID,
-                HtmlLogsTable.PARSER_VERSION_ID,
-                HtmlLogsTable.HTML,
-                HtmlLogsTable.CREATED_AT
+                htmlLogsTable.SITE_ID,
+                htmlLogsTable.SITE_URI_ID,
+                htmlLogsTable.PARSER_VERSION_ID,
+                htmlLogsTable.HTML,
+                htmlLogsTable.CREATED_AT
             )
-            .from(HtmlLogsTable)
-            .where(HtmlLogsTable.SITE_ID.eq(testedSiteId))
+            .from(htmlLogsTable)
+            .where(htmlLogsTable.SITE_ID.eq(testedSiteId))
             .limit(1)
             .fetch();
 

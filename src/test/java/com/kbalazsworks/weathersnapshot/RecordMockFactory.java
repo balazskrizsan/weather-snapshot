@@ -5,21 +5,17 @@ import com.kbalazsworks.weathersnapshot.db.tables.ParsedTemperatureSnapshots;
 import com.kbalazsworks.weathersnapshot.entity.HtmlLog;
 import com.kbalazsworks.weathersnapshot.entity.ParsedTemperatureSnapshot;
 import com.kbalazsworks.weathersnapshot.utils.services.DateTimeService;
-import org.jooq.DSLContext;
-import org.jooq.Record4;
-import org.jooq.Record5;
-import org.jooq.Result;
+import org.jooq.*;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
 public class RecordMockFactory
 {
-    final private static HtmlLogs
-        htmlLogsTable                   = HtmlLogs.HTML_LOGS;
+    final private static HtmlLogs htmlLogsTable = HtmlLogs.HTML_LOGS;
     final private static ParsedTemperatureSnapshots
-        parsedTemperatureSnapshotsTable = ParsedTemperatureSnapshots.PARSED_TEMPERATURE_SNAPSHOTS;
+                                  parsedTemperatureSnapshotsTable
+                                                = ParsedTemperatureSnapshots.PARSED_TEMPERATURE_SNAPSHOTS;
 
     static DateTimeService dateTimeService = new DateTimeService();
 
@@ -53,6 +49,19 @@ public class RecordMockFactory
                         htmlLog.getCreatedAt()
                     )
             );
+        }
+
+        return result;
+    }
+
+    public static Result<Record1<LocalDateTime>> getHtmlLogRecordMockWithOnlyParsedAt(
+        DSLContext qB, List<LocalDateTime> parsedDates
+    )
+    {
+        Result<Record1<LocalDateTime>> result = qB.newResult(htmlLogsTable.PARSED);
+        for (LocalDateTime parsedDate : parsedDates)
+        {
+            result.add(qB.newRecord(htmlLogsTable.PARSED).values(parsedDate));
         }
 
         return result;

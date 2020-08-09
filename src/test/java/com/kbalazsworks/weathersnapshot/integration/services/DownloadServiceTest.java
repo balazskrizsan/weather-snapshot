@@ -2,7 +2,6 @@ package com.kbalazsworks.weathersnapshot.integration.services;
 
 import com.kbalazsworks.weathersnapshot.MockFactory;
 import com.kbalazsworks.weathersnapshot.RecordMockFactory;
-import com.kbalazsworks.weathersnapshot.db.tables.HtmlLogs;
 import com.kbalazsworks.weathersnapshot.entity.HtmlLog;
 import com.kbalazsworks.weathersnapshot.enums.HttpMethodEnum;
 import com.kbalazsworks.weathersnapshot.enums.SiteEnum;
@@ -36,9 +35,8 @@ import static org.springframework.test.context.jdbc.SqlConfig.TransactionMode.IS
 
 public class DownloadServiceTest extends AbstractIntegrationTest
 {
-    final private HtmlLogs          htmlLogsTable = HtmlLogs.HTML_LOGS;
     @Autowired
-    private       DownloaderService downloaderService;
+    private DownloaderService downloaderService;
 
     @Test
     @SqlGroup(

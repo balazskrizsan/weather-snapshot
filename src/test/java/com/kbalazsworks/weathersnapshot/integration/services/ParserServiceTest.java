@@ -2,12 +2,12 @@ package com.kbalazsworks.weathersnapshot.integration.services;
 
 import com.kbalazsworks.weathersnapshot.MockFactory;
 import com.kbalazsworks.weathersnapshot.RecordMockFactory;
-import com.kbalazsworks.weathersnapshot.db.tables.ParsedTemperatureSnapshots;
 import com.kbalazsworks.weathersnapshot.entity.ParsedTemperatureSnapshot;
 import com.kbalazsworks.weathersnapshot.integration.AbstractIntegrationTest;
 import com.kbalazsworks.weathersnapshot.service.ParserService;
 import com.kbalazsworks.weathersnapshot.utils.services.DateTimeService;
 import org.jooq.DSLContext;
+import org.jooq.Record1;
 import org.jooq.Record4;
 import org.jooq.Result;
 import org.junit.Assert;
@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.AFTER_TEST_METHOD;
 import static org.springframework.test.context.jdbc.Sql.ExecutionPhase.BEFORE_TEST_METHOD;
 import static org.springframework.test.context.jdbc.SqlConfig.TransactionMode.ISOLATED;
@@ -32,9 +33,6 @@ public class ParserServiceTest extends AbstractIntegrationTest
 
     @Autowired
     private DateTimeService dateTimeService;
-
-    final private ParsedTemperatureSnapshots parsedTemperatureSnapshotsTable
-        = ParsedTemperatureSnapshots.PARSED_TEMPERATURE_SNAPSHOTS;
 
     @Test
     @SqlGroup(
@@ -51,7 +49,7 @@ public class ParserServiceTest extends AbstractIntegrationTest
             ),
         }
     )
-    public void start_ParserAllRecord_SuccessfulSave() throws ParseException
+    public void start_parserAllRecord_auccessfulSave() throws ParseException
     {
         // Arrange
         DSLContext qB = getQueryBuilder();
@@ -86,6 +84,14 @@ public class ParserServiceTest extends AbstractIntegrationTest
                 }}
             );
 
+        Result<Record1<LocalDateTime>> expectedHtmlLogResult = RecordMockFactory
+            .getHtmlLogRecordMockWithOnlyParsedAt(
+                qB, new ArrayList<>()
+                {{
+                    add(MockFactory.getLocalDateTimeMockFromDateTime("2020-12-30 12:13:14"));
+                }}
+            );
+
         // Act
         parserService.start();
 
@@ -100,6 +106,12 @@ public class ParserServiceTest extends AbstractIntegrationTest
             .from(parsedTemperatureSnapshotsTable)
             .fetch();
 
-        Assert.assertArrayEquals(expectedResult.toArray(), result.toArray());
+        Result<Record1<LocalDateTime>> htmlLogsResult = qB.select(htmlLogsTable.PARSED).from(htmlLogsTable).fetch();
+
+        assertAll(
+            () -> Assert.assertArrayEquals(expectedResult.toArray(), result.toArray()),
+            () -> Assert.assertArrayEquals(expectedHtmlLogResult.toArray(), htmlLogsResult.toArray())
+        );
+
     }
 }

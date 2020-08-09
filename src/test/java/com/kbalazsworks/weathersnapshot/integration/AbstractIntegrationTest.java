@@ -1,27 +1,21 @@
 package com.kbalazsworks.weathersnapshot.integration;
 
 import com.kbalazsworks.weathersnapshot.AbstractTest;
+import com.kbalazsworks.weathersnapshot.db.tables.HtmlLogs;
+import com.kbalazsworks.weathersnapshot.db.tables.ParsedTemperatureSnapshots;
 import com.kbalazsworks.weathersnapshot.utils.services.JooqService;
 import org.jooq.DSLContext;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.server.LocalServerPort;
 
 public abstract class AbstractIntegrationTest extends AbstractTest
 {
-//    @LocalServerPort
-//    private int         port;
-    private JooqService jooqService;
+    final protected HtmlLogs htmlLogsTable = HtmlLogs.HTML_LOGS;
 
-//    int getPort()
-//    {
-//        return port;
-//    }
+    final protected ParsedTemperatureSnapshots parsedTemperatureSnapshotsTable
+        = ParsedTemperatureSnapshots.PARSED_TEMPERATURE_SNAPSHOTS;
 
     @Autowired
-    public void setJooqService(JooqService jooqService)
-    {
-        this.jooqService = jooqService;
-    }
+    private JooqService jooqService;
 
     protected DSLContext getQueryBuilder()
     {
